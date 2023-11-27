@@ -1,9 +1,10 @@
-package HARBEY;
+//Este programa en Java realiza la conversión de temperatura de grados Celsius a Kelvin. 
+package TELECOMUNICACIONES;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-public class GUAQUETA {
+public class CONVERTIDOR {
 
 	  public static void main(String[] args) throws IOException{
 		    
