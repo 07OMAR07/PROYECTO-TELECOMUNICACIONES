@@ -1,0 +1,78 @@
+// Codigo en JAVA para el costeo de un producto en el area de contabiilidad.
+
+package TELECOMUNICACIONES;
+
+import java.util.Scanner;
+
+public class Costeo_de_un_producto{
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner scanner = new Scanner(System.in);
+
+		// Preguntar cuántas veces realizar el procedimiento
+		System.out.print("Ingrese cuántas veces desea realizar el procedimiento de costeo: ");
+		int numIteraciones = scanner.nextInt();
+
+		// Matriz para almacenar los resultados del costeo
+		double[][] resultadosCosteo = new double[numIteraciones][4]; // [numIteraciones filas][4 columnas]
+
+		for (int i = 0; i < numIteraciones; i++) {
+			System.out.println("\nCosteo " + (i + 1) + ":");
+
+			// Captura de datos
+			System.out.print("Ingrese el costo de materiales directos: ");
+			double costoMaterialesDirectos = scanner.nextDouble();
+
+			System.out.print("Ingrese el costo de mano de obra directa: ");
+			double costoManoObraDirecta = scanner.nextDouble();
+
+			System.out.print("Ingrese los costos indirectos de fabricación: ");
+			double costosIndirectosFabricacion = scanner.nextDouble();
+
+			// Cálculos
+			double costoTotal = calcularCostoTotal(costoMaterialesDirectos, costoManoObraDirecta,
+					costosIndirectosFabricacion);
+
+			// Almacenar resultados en la matriz
+			resultadosCosteo[i][0] = costoMaterialesDirectos;
+			resultadosCosteo[i][1] = costoManoObraDirecta;
+			resultadosCosteo[i][2] = costosIndirectosFabricacion;
+			resultadosCosteo[i][3] = costoTotal;
+		}
+
+		// Calcular el costo total acumulado
+		double costoTotalAcumulado = calcularCostoTotalAcumulado(resultadosCosteo);
+
+		// Presentación del costo total acumulado
+		System.out.println("\nResumen de Costeos:");
+		for (int i = 0; i < numIteraciones; i++) {
+			System.out.println("\nCosteo " + (i + 1) + ":");
+			System.out.println("Costo de Materiales Directos: $" + resultadosCosteo[i][0]);
+			System.out.println("Costo de Mano de Obra Directa: $" + resultadosCosteo[i][1]);
+			System.out.println("Costos Indirectos de Fabricación: $" + resultadosCosteo[i][2]);
+			System.out.println("----------------------------------");
+			System.out.println("Costo Total del Producto: $" + resultadosCosteo[i][3]);
+		}
+		System.out.println("\nCosto Total Acumulado: $" + costoTotalAcumulado);
+
+		// Cierre del scanner
+		scanner.close();
+	}
+
+	// Método para calcular el costo total
+	private static double calcularCostoTotal(double costoMaterialesDirectos, double costoManoObraDirecta,
+			double costosIndirectosFabricacion) {
+		return costoMaterialesDirectos + costoManoObraDirecta + costosIndirectosFabricacion;
+	}
+
+	// Método para calcular el costo total acumulado
+	private static double calcularCostoTotalAcumulado(double[][] resultadosCosteo) {
+		double costoTotalAcumulado = 0;
+		for (int i = 0; i < resultadosCosteo.length; i++) {
+			costoTotalAcumulado += resultadosCosteo[i][3]; // Sumar el costo total de cada iteración
+		}
+		return costoTotalAcumulado;
+	}
+}
