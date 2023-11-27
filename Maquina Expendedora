@@ -1,0 +1,245 @@
+//El código proporcionado es un programa Java que simula el funcionamiento de una máquina expendedora. 
+//Este es el Main instanciado en una clase diferente a la clase que va a contener el desarrollo del programa de la maquina expendedora.
+// Definición de la clase principal
+package TELECOMUNICACIONES;
+
+public class H {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		holi m1 = new holi();
+
+    // Llamar al método crearmatriz de la instancia m1
+		m1.crearmatriz();
+	}
+}
+
+//Este es el codigo con el desarrollo del programa de una maquina expendora.
+
+package HARBEY;
+
+import javax.swing.JOptionPane;
+
+public class holi {
+	int producto;
+	int n, m;
+
+// Método para crear la matriz de productos, precios y cantidades
+	public void crearmatriz() {
+
+		int sumas[][] = new int[4][4];
+		String[][] util = new String[4][4];
+		int[][] precios = new int[4][4];
+		byte[][] cantidades = new byte[4][4];
+
+		precios[0][0] = 2500;
+		precios[0][1] = 3000;
+		precios[0][2] = 2800;
+		precios[0][3] = 4500;
+		precios[1][0] = 8500;
+		precios[1][1] = 6500;
+		precios[1][2] = 4500;
+		precios[1][3] = 7800;
+		precios[2][0] = 9000;
+		precios[2][1] = 12000;
+		precios[2][2] = 6000;
+		precios[2][3] = 3700;
+		precios[3][0] = 15000;
+		precios[3][1] = 6000;
+		precios[3][2] = 8600;
+		precios[3][3] = 10000;
+
+		util[0][0] = "Clorox";
+		util[0][1] = "Trapero";
+		util[0][2] = "Escoba";
+		util[0][3] = "Recogedor";
+		util[1][0] = "Jabon en polvo";
+		util[1][1] = "Balde";
+		util[1][2] = "Sampic";
+		util[1][3] = "Papel Higienico";
+		util[2][0] = "Toalla manos";
+		util[2][1] = "Jabon rey";
+		util[2][2] = "Cepillo dientes";
+		util[2][3] = "Cepillo ropa";
+		util[3][0] = "Chupa";
+		util[3][1] = "Prestobarba";
+		util[3][2] = "Desodorante";
+		util[3][3] = "Aromatizante";
+
+		for (int i = 0; i < 4; i++) {
+
+			for (int j = 0; j < 4; j++) {
+
+				cantidades[i][j] = 10;
+
+			}
+
+		}
+
+		int preguntar = 0;
+
+		do {
+			int comprar;
+			comprar = Integer.parseInt(
+					JOptionPane.showInputDialog("BIENVENIDO A LA MAQUINA" + "\n 1) Comprar" + "\n" + "2) finalizar"));
+			switch (comprar) {
+			case 1:
+				String resultado = "";
+				for (int i = 0; i < 4; i++) {
+
+					for (int j = 0; j < 4; j++) {
+
+						resultado += "[" + util[i][j] + "]";
+						resultado += "   ";
+
+					}
+					resultado += "\n";
+				}
+				JOptionPane.showMessageDialog(null, "Productos " + "\n" + resultado);
+
+				String resultado1 = "";
+				for (int i = 0; i < 4; i++) {
+
+					for (int j = 0; j < 4; j++) {
+
+						resultado1 += "[" + precios[i][j] + "]";
+						resultado1 += "   ";
+
+					}
+					resultado1 += "\n";
+				}
+				JOptionPane.showMessageDialog(null, "Precios " + "\n" + resultado1);
+
+				String resultado2 = "";
+				for (int i = 0; i < 4; i++) {
+
+					for (int j = 0; j < 4; j++) {
+
+						resultado2 += "[" + cantidades[i][j] + "]";
+						resultado2 += "   ";
+
+					}
+					resultado2 += "\n";
+				}
+
+				JOptionPane.showMessageDialog(null, "Cantidades " + "\n" + resultado2);
+
+				n = Integer.parseInt(JOptionPane.showInputDialog("digite la primera posicion"));
+				m = Integer.parseInt(JOptionPane.showInputDialog("digite la segunda posicion"));
+
+				JOptionPane.showMessageDialog(null, util[n][m] + "\n" + "tiene un precio de: " + precios[n][m] + " \n"
+						+ "cantidad: " + cantidades[n][m]);
+				if (cantidades[n][m] <= 0) {
+					JOptionPane.showMessageDialog(null, "no hay existencias");
+
+				} else if (cantidades[n][m] > 0) {
+					cantidades[n][m] -= 1;
+					int compra;
+					compra = Integer.parseInt(JOptionPane.showInputDialog(
+							"¿Esta seguro que quiere realizar su compra?" + "\n" + "1) Si" + "\n" + "2) NO"));
+					switch (compra) {
+        
+					case 1:
+						int pago;
+						pago = Integer.parseInt(JOptionPane.showInputDialog("Digite su cantidad de dinero"));
+
+						if (pago < precios[n][m]) {
+							JOptionPane.showMessageDialog(null, "no posee el efectivo");
+							int cancelar;
+							cancelar = Integer.parseInt(JOptionPane
+									.showInputDialog("¿Quiere cancelar su compra?" + "\n" + "1) Si" + "\n" + "2) NO"));
+							switch (cancelar) {
+							case 1:
+								cantidades[n][m] += 1;
+
+								break;
+							case 2:
+								cantidades[n][m] += 1;
+								break;
+							}
+						} else if (pago > precios[n][m]) {
+							int cambio;
+							cambio = pago - precios[n][m];
+							JOptionPane.showMessageDialog(null, "Su cambio es: " + cambio);
+
+							sumas[n][m] += precios[n][m];
+
+						} else if (pago == precios[n][m]) {
+							JOptionPane.showMessageDialog(null, "Gracias por su compra");
+
+							sumas[n][m] += precios[n][m];
+
+						}
+						break;
+					case 2:
+
+						break;
+					}
+				}
+
+				break;
+
+			case 2022:
+
+				JOptionPane.showMessageDialog(null, "Gracias por su visita, la maquina se va a apagar");
+				String resultado3 = "";
+				for (int i = 0; i < 4; i++) {
+
+					for (int j = 0; j < 4; j++) {
+
+						resultado3 += "[" + util[i][j] + "]";
+						resultado3 += "   ";
+
+					}
+					resultado3 += "\n";
+				}
+				JOptionPane.showMessageDialog(null, "Productos " + "\n" + resultado3);
+
+				String resultado4 = "";
+				for (int i = 0; i < 4; i++) {
+
+					for (int j = 0; j < 4; j++) {
+
+						resultado4 += "[" + precios[i][j] + "]";
+						resultado4 += "   ";
+
+					}
+					resultado4 += "\n";
+				}
+				JOptionPane.showMessageDialog(null, "Precios " + "\n" + resultado4);
+
+				String resultado5 = "";
+				for (int i = 0; i < 4; i++) {
+
+					for (int j = 0; j < 4; j++) {
+
+						resultado5 += "[" + cantidades[i][j] + "]";
+						resultado5 += "   ";
+
+					}
+					resultado5 += "\n";
+				}
+
+				JOptionPane.showMessageDialog(null, "Cantidades " + "\n" + resultado5);
+
+				String resultado6 = "";
+				for (int i = 0; i < 4; i++) {
+
+					for (int j = 0; j < 4; j++) {
+
+						resultado6 += "[" + sumas[i][j] + "]";
+						resultado6 += "   ";
+
+					}
+					resultado6 += "\n";
+				}
+				JOptionPane.showMessageDialog(null, "ventas del dia " + "\n" + resultado6);
+				preguntar = 1;
+				break;
+			}
+
+		} while (preguntar == 0);
+
+	}
+}
